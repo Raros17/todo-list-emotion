@@ -10,6 +10,7 @@ function App() {
   const handleInputChange = (e)=>{
     setInputValue(e.target.value);
   }
+
   const handleAddBtnClick = () => {
     if(inputValue.trim() !== ''){
       const newItem = {
@@ -24,6 +25,12 @@ function App() {
     }
   }
 
+  const handleOnKeyPress = (e) =>{
+    if(e.key==='Enter'){
+      handleAddBtnClick();
+    }
+  }
+
   return (
     <div className="App">
       <section style={{backgroundColor:"orange", height:"100px", display:"flex", justifyContent:"center", alignItems:"center", fontSize:"25px", fontWeight:"800"}}>
@@ -32,8 +39,8 @@ function App() {
       <section>
         <section>
           <h2>장바구니 목록에 아이템 담기</h2>
-          <input type="text" placeholder='할일을 입력하세요' style={{height:"30px", borderRadius:"20px", marginRight:"10px"}} value={inputValue} onChange={handleInputChange}></input>
-          <button onClick={handleAddBtnClick}>추가하기</button>
+          <input type="text" placeholder='할일을 입력하세요' style={{height:"30px", borderRadius:"20px", marginRight:"10px"}} value={inputValue}  onKeyDown={handleOnKeyPress} onChange={handleInputChange}></input>
+          <button onClick={handleAddBtnClick} >추가하기</button>
           </section>
         <section>
           {todo.map(item => ( <TodoItem key={item.id} item={item}/>))}
