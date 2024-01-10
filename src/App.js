@@ -1,23 +1,10 @@
 import './App.css';
 import TodoItem from './TodoItem';
-import { useState } from 'react';
-
-
-const mock = [
-  {
-    id: 0,
-    isDone: false,
-    content: "사과"
-  },
-  {
-    id: 1,
-    isDone: false,
-    content: "배"
-  }
-]
+import listState from './atoms/listState';
+import { useRecoilState } from 'recoil';
 
 function App() {
-  const [todo, setTodo] = useState(mock);
+  const [todo, setTodo] = useRecoilState(listState);
   return (
     <div className="App">
       <section style={{backgroundColor:"orange", height:"100px", display:"flex", justifyContent:"center", alignItems:"center", fontSize:"25px", fontWeight:"800"}}>
