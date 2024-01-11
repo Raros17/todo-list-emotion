@@ -1,10 +1,5 @@
 import { atom } from "recoil";
 
-const inputState = atom({
-    key: 'inputState',    
-    default: '',
-  });
-
 const listState = atom({
     key: 'listState',
     default: [{
@@ -25,4 +20,4 @@ const listState = atom({
     ],
 })
 
-export {listState, inputState};
+export {listState};

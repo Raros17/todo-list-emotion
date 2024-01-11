@@ -15,15 +15,41 @@ function TodoItem({item}) {
   }
 
   return (
-    <div css={css({display:"flex", justifyContent:"left", margin:"20px"})}>
-        <div><input type="checkbox" css={css({zoom:"1.4", cursor:"pointer"})}/></div>
-        <span css={css({fontSize:"20px", fontWeight:"700", marginLeft:"10px", marginRight:"10px"})}>{item.content}</span>
+    <div css={todoItemContainer}>
+        <input type="checkbox" css={isDoneCheckbox}/>
+        <span css={itemContent}>{item.content}</span>
         <div>
-          <button css={css({cursor:"pointer"})}><FaPenToSquare /></button>          
-          <button css={css({cursor:"pointer"})} onClick={()=> handleDeleteItemClick(item.id)}><MdDelete/></button>
+          <button css={[itemBtn, btnMargin]}><FaPenToSquare /></button>          
+          <button css={itemBtn} onClick={()=> handleDeleteItemClick(item.id)}><MdDelete/></button>
         </div>
     </div>
   );
 }
 
 export default TodoItem;
+
+const todoItemContainer = css`
+  label: 'todo-item-container';
+  display: flex;
+  justify-content: left;
+  margin: 20px;
+`
+
+const isDoneCheckbox = css`
+  zoom: 1.4;
+  cursor: pointer;
+`
+
+const itemContent = css`
+  font-size: 20px;
+  font-weight: 700;
+  margin:0 10px;
+`
+const itemBtn = css`
+  cursor: pointer;
+  border-radius: 5px;
+`
+
+const btnMargin = css`
+  margin-right: 5px;
+`
