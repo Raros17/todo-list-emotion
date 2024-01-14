@@ -4,25 +4,34 @@ import { css } from "@emotion/react";
 import { IoSearch } from "react-icons/io5";
 import { searchState } from './atoms/searchState';
 import { useRecoilState } from 'recoil';
+import { filteredListState } from './atoms/filteredListState';
+import { listState } from './atoms/listState';
 
-function Header({onSearch}) {
+function Header() {
     const [searchValue, setSearchValue] = useRecoilState(searchState);
+    const [filteredTodo, setFilteredTodo] = useRecoilState(filteredListState);
+    const [todo, setTodo] = useRecoilState(listState);
+
+    const searchItems = () =>{
+        const filteredItems = todo.filter(item=>
+          item.content.toLowerCase().includes(searchValue.trim().toLowerCase()))
+        setFilteredTodo(filteredItems);        
+        if (filteredItems.length > 0) {
+            setSearchValue('');
+          }
+      }
+
     const handleOnKeyPress = (e) =>{
         if(e.key==='Enter'){
-            onSearch()
+            searchItems()            
         }
       }
 
-      const searchItems = () => {
-        //input에 입력된 수치를 onChange마다 searchValue에 넣는다.
-        //searchValue.trim()이 빈칸이 아니라면,
-        //아래 사항을 실행한다.
-        //searchValue의 값을 todo목록과 비교하여 해당 값을 포함하는 리스트를 불러온다.
-        //searchValue를 초기화한다.
+    const searchValueChange = () => {
         if(searchValue.trim()!== ''){
             setSearchValue(searchValue.trim());
-        }
-        onSearch()
+            searchItems()
+        }     
       }
     
   return (
@@ -30,7 +39,7 @@ function Header({onSearch}) {
         <span>🍒장 봐올 리스트🍎</span>
         <div>
             <input type='text' value={searchValue} onChange={e=> setSearchValue(e.target.value)} placeholder='아이템을 목록에서 검색해보세요' css={searchBox} onKeyDown={handleOnKeyPress}></input>
-            <button css={searchBtn} onClick={searchItems}><IoSearch/></button>
+            <button css={searchBtn} onClick={searchValueChange}><IoSearch/></button>
         </div>
       </header>
       )

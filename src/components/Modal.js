@@ -6,7 +6,6 @@ import { css } from "@emotion/react";
 
 function Modal() {
   const [todo, setTodo] = useRecoilState(listState);
-
   const deleteItemList = () => {
     setTodo([])
   }

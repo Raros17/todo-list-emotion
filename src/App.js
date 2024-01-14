@@ -15,14 +15,9 @@ function App() {
   const [inputValue, setInputValue] = useRecoilState(inputState);
   const [filteredTodo, setFilteredTodo] = useRecoilState(filteredListState);
   const [searchValue, setSearchValue] = useRecoilState(searchState);
+
   const handleInputChange = (e)=>{
     setInputValue(e.target.value);
-  }
-
-  const searchItems = () =>{
-    const filteredItems = todo.filter(item=>
-      item.content.toLowerCase().includes(searchValue.trim().toLowerCase()))
-    setFilteredTodo(filteredItems);
   }
 
   const handleAddBtnClick = () => {
@@ -35,8 +30,12 @@ function App() {
         };
         setTodo([...todo, newItem]);
         setInputValue('');
+        setFilteredTodo('')
+        setSearchValue('')
       } else {
         alert("동일한 아이템이 있습니다.");
+        setFilteredTodo('')
+        setSearchValue('')
       }}
   }
 
@@ -56,7 +55,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header onSearch={searchItems}/>
+      <Header />
       <section css={itemSection}>
         <section className='input-section'>
           <h2 css={pageTitle}>목록에 아이템 담기</h2>
@@ -69,11 +68,15 @@ function App() {
           </section>
         <section css={listSection} className='list-section'>
           <div css={itemListContainer}>
+            {/*아이템이 없다면? 검색한 아이템이 없습니다 보여줘야되는데 뭐야 조건이 세개임....*/}
             {filteredTodo.length>0 ? (
               filteredTodo.map(item => (
                 <TodoItem key={item.id} item={item}></TodoItem>
-              ))
-            ):todo.map(item => ( <TodoItem key={item.id} item={item}/>
+              )) 
+              ):
+                searchValue.trim() !== ''?(
+                  <div css={emptyItem}>일치하는 항목이 없습니다.</div>
+                ):(todo.map(item => ( <TodoItem key={item.id} item={item}/>)
             ))
             }
             
@@ -89,6 +92,11 @@ export default App;
 
 const itemSection = css`
   margin-top: 150px;
+`
+
+const emptyItem = css`
+  height: 100px;
+  padding-top: 50px;;
 `
 
 const pageTitle = css`
