@@ -7,13 +7,22 @@ import { useRecoilState } from 'recoil';
 import { css } from "@emotion/react";
 import Modal from './components/Modal';
 import Header from './Header';
+import { searchState } from './atoms/searchState';
+import { filteredListState } from './atoms/filteredListState';
 
 function App() {
   const [todo, setTodo] = useRecoilState(listState);
   const [inputValue, setInputValue] = useRecoilState(inputState);
-
+  const [filteredTodo, setFilteredTodo] = useRecoilState(filteredListState);
+  const [searchValue, setSearchValue] = useRecoilState(searchState);
   const handleInputChange = (e)=>{
     setInputValue(e.target.value);
+  }
+
+  const searchItems = () =>{
+    const filteredItems = todo.filter(item=>
+      item.content.toLowerCase().includes(searchValue.trim().toLowerCase()))
+    setFilteredTodo(filteredItems);
   }
 
   const handleAddBtnClick = () => {
@@ -47,7 +56,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
+      <Header onSearch={searchItems}/>
       <section css={itemSection}>
         <section className='input-section'>
           <h2 css={pageTitle}>목록에 아이템 담기</h2>
@@ -60,8 +69,14 @@ function App() {
           </section>
         <section css={listSection} className='list-section'>
           <div css={itemListContainer}>
-            {todo.map(item => ( <TodoItem key={item.id} item={item}/>
-            ))}
+            {filteredTodo.length>0 ? (
+              filteredTodo.map(item => (
+                <TodoItem key={item.id} item={item}></TodoItem>
+              ))
+            ):todo.map(item => ( <TodoItem key={item.id} item={item}/>
+            ))
+            }
+            
             </div>
         </section>
         <button onClick={deleteItemList} css={deleteAllBtn}>리스트 전체 삭제</button>
