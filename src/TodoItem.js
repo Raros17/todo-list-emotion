@@ -18,7 +18,7 @@ function TodoItem({item}) {
     <div css={todoItemContainer}>
         <input type="checkbox" css={isDoneCheckbox}/>
         <span css={itemContent}>{item.content}</span>
-        <div>
+        <div css={css({minWidth:"70px"})}>
           <button css={[itemBtn, btnMargin]}><FaPenToSquare /></button>          
           <button css={itemBtn} onClick={()=> handleDeleteItemClick(item.id)}><MdDelete/></button>
         </div>
@@ -43,6 +43,7 @@ const itemContent = css`
   font-size: 20px;
   font-weight: 700;
   margin:0 10px;
+  text-align: start;
 `
 const itemBtn = css`
   cursor: pointer;
