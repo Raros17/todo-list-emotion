@@ -5,6 +5,8 @@ import { inputState } from './atoms/inputState';
 import { useRecoilState } from 'recoil';
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import Modal from './components/Modal';
+import Header from './Header';
 
 function App() {
   const [todo, setTodo] = useRecoilState(listState);
@@ -45,17 +47,16 @@ function App() {
 
   return (
     <div className="App">
-      <section css={header}>
-        🍒장 봐올 리스트🍎
-      </section>
-      <section>
+      <Header/>
+      <section css={itemSection}>
         <section className='input-section'>
           <h2 css={pageTitle}>목록에 아이템 담기</h2>
-          <input type="text" placeholder='살 목록을 입력하세요' 
+          <input type="text" placeholder='아이템을 새로 추가하세요' 
           css={inputLine}  
           value={inputValue}  onKeyDown={handleOnKeyPress} onChange={handleInputChange}></input>
           <button css={addBtn}  
-          onClick={handleAddBtnClick} >추가하기</button>
+          onClick={handleAddBtnClick} >추가하기
+          </button>
           </section>
         <section css={listSection} className='list-section'>
           <div css={itemListContainer}>
@@ -71,15 +72,8 @@ function App() {
 }
 export default App;
 
-const header = css`
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 29px;
-  font-weight: 600;
-  border-bottom: 3px solid #ccc;
-  font-family: 'seolleimcool-SemiBold';
+const itemSection = css`
+  margin-top: 150px;
 `
 
 const pageTitle = css`

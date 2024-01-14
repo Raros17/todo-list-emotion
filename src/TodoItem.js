@@ -29,7 +29,6 @@ function TodoItem({item}) {
 export default TodoItem;
 
 const todoItemContainer = css`
-  label: 'todo-item-container';
   display: flex;
   justify-content: left;
   margin: 20px;
