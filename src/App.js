@@ -15,7 +15,7 @@ function App() {
   const [inputValue, setInputValue] = useRecoilState(inputState);
   const [filteredTodo, setFilteredTodo] = useRecoilState(filteredListState);
   const [searchValue, setSearchValue] = useRecoilState(searchState);
-
+  console.log(...todo)
   const handleInputChange = (e)=>{
     setInputValue(e.target.value);
   }

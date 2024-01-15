@@ -7,11 +7,17 @@ import { useRecoilState } from 'recoil';
 import { filteredListState } from './atoms/filteredListState';
 import { listState } from './atoms/listState';
 import { FaMoon } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 
 function Header() {
     const [searchValue, setSearchValue] = useRecoilState(searchState);
     const [filteredTodo, setFilteredTodo] = useRecoilState(filteredListState);
     const [todo, setTodo] = useRecoilState(listState);
+    
+    const showList = ()=>{
+        searchItems();
+        setSearchValue('');
+    }
 
     const searchItems = () =>{
         const filteredItems = todo.filter(item=>
@@ -37,6 +43,7 @@ function Header() {
     
   return (
       <header css={header}>
+        <button onClick={showList} css={homeBtn}><FaHome /></button>
         <div css={searchContainer}>
             <span>🍒장 봐올 리스트🍎</span>
             <div>
@@ -63,6 +70,29 @@ const header = css`
   font-weight: 600;
   border-bottom: 3px solid #ccc;
   font-family: 'seolleimcool-SemiBold';
+`
+
+const homeBtn = css`
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    left: 10rem;
+    font-size: 25px;
+    text-align: center;
+    padding-top:5px;
+    background-color: #fff;
+    border: 1px solid #eb7473;
+    color:#eb7473;
+    &:hover {
+        transition: all 0.5s ease;
+        color: #f75a55;
+        border: 1px solid #f75a55;
+    }
+    &:active {
+        color: #b31208;
+    }
 `
 
 const darkModeBtn = css`
