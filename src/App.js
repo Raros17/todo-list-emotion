@@ -55,6 +55,10 @@ function App() {
 
   return (
     <div className="App">
+      <section>
+        <div css={overlay}></div>
+        <Modal/>
+      </section>
       <Header />
       <section css={itemSection}>
         <section className='input-section'>
@@ -68,15 +72,15 @@ function App() {
           </section>
         <section css={listSection} className='list-section'>
           <div css={itemListContainer}>
-            {/*아이템이 없다면? 검색한 아이템이 없습니다 보여줘야되는데 뭐야 조건이 세개임....*/}
             {filteredTodo.length>0 ? (
               filteredTodo.map(item => (
                 <TodoItem key={item.id} item={item}></TodoItem>
               )) 
               ):
                 searchValue.trim() !== ''?(
-                  <div css={emptyItem}>일치하는 항목이 없습니다.</div>
-                ):(todo.map(item => ( <TodoItem key={item.id} item={item}/>)
+                  <div css={emptyItem}>검색 결과와 일치하는 항목이 없습니다.</div>
+                ):(
+                  todo.map(item => ( <TodoItem key={item.id} item={item}/>)
             ))
             }
             
@@ -89,6 +93,13 @@ function App() {
   );
 }
 export default App;
+
+const overlay = css`
+  position:fixed;
+  inset:0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 998;
+`
 
 const itemSection = css`
   margin-top: 150px;
