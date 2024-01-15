@@ -15,7 +15,6 @@ function App() {
   const [inputValue, setInputValue] = useRecoilState(inputState);
   const [filteredTodo, setFilteredTodo] = useRecoilState(filteredListState);
   const [searchValue, setSearchValue] = useRecoilState(searchState);
-  console.log(...todo)
   const handleInputChange = (e)=>{
     setInputValue(e.target.value);
   }
@@ -55,7 +54,7 @@ function App() {
 
   return (
     <div className="App">
-      <section>
+      <section css={css({height:"50%", width:"100%", position:"absolute", top:"50%"})}>
         <div css={overlay}></div>
         <Modal/>
       </section>
@@ -97,7 +96,7 @@ export default App;
 const overlay = css`
   position:fixed;
   inset:0;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.5);
   z-index: 998;
 `
 

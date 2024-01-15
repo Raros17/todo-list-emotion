@@ -10,7 +10,7 @@ function Modal() {
     setTodo([])
   }
   return (
-    <section css={css({display:"flex", justifyContent:"center"})}>
+    <section css={css({display:"flex",justifyContent:"center", alignItems:"center"})}>
         <div css={modalContainer}>
             <button css={modalCloseBtn}>x</button>
             <p>정말 전체를 삭제하시겠습니까?</p>
