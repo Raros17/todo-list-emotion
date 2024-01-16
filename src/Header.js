@@ -3,7 +3,7 @@ import './styles/App.css';
 import { css } from "@emotion/react";
 import { FaSearch } from "react-icons/fa";
 import { searchState } from './atoms/searchState';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { filteredListState } from './atoms/filteredListState';
 import { listState } from './atoms/listState';
 import { FaMoon } from "react-icons/fa";
@@ -11,8 +11,8 @@ import { FaHome } from "react-icons/fa";
 
 function Header() {
     const [searchValue, setSearchValue] = useRecoilState(searchState);
-    const [filteredTodo, setFilteredTodo] = useRecoilState(filteredListState);
-    const [todo, setTodo] = useRecoilState(listState);
+    const setFilteredTodo = useSetRecoilState(filteredListState);
+    const todo = useRecoilValue(listState);
     
     const showList = ()=>{
         searchItems();

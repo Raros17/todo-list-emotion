@@ -1,22 +1,23 @@
 import React from "react";
 import { listState } from "../atoms/listState";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-function Modal() {
-  const [todo, setTodo] = useRecoilState(listState);
+function Modal({setModalStateDefault}) {
+  const setTodo = useSetRecoilState(listState);
   const deleteItemList = () => {
     setTodo([])
+    setModalStateDefault();
   }
   return (
     <section css={css({display:"flex",justifyContent:"center", alignItems:"center"})}>
         <div css={modalContainer}>
-            <button css={modalCloseBtn}>x</button>
+            <button css={modalCloseBtn} onClick={setModalStateDefault}>x</button>
             <p>정말 전체를 삭제하시겠습니까?</p>
             <div css={modalBtnsContainer}>
                 <button onClick={deleteItemList} css={[modalBtn, yesBtnStyle]}>예</button>
-                <button css={[modalBtn, noBtnStyle]}>아니오</button>
+                <button css={[modalBtn, noBtnStyle]} onClick={setModalStateDefault}>아니오</button>
             </div>
         </div>        
     </section>

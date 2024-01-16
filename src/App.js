@@ -9,12 +9,23 @@ import Modal from './components/Modal';
 import Header from './Header';
 import { searchState } from './atoms/searchState';
 import { filteredListState } from './atoms/filteredListState';
+import { modalState } from './atoms/modalState'
+
+
 
 function App() {
   const [todo, setTodo] = useRecoilState(listState);
   const [inputValue, setInputValue] = useRecoilState(inputState);
   const [filteredTodo, setFilteredTodo] = useRecoilState(filteredListState);
   const [searchValue, setSearchValue] = useRecoilState(searchState);
+  const [modalDataState, setModalDataState] = useRecoilState(modalState);
+
+  const setModalStateDefault = () =>{
+    setModalDataState(!modalDataState)
+  }
+
+  console.log(modalDataState);
+
   const handleInputChange = (e)=>{
     setInputValue(e.target.value);
   }
@@ -47,17 +58,14 @@ function App() {
       handleAddBtnClick();
     }
   }
-
-  const deleteItemList = () => {
-    setTodo([])
-  }
-
+  
   return (
     <div className="App">
-      <section css={css({height:"50%", width:"100%", position:"absolute", top:"50%"})}>
-        <div css={overlay}></div>
-        <Modal/>
-      </section>
+      {modalDataState&&(
+        <section css={css({height:"50%", width:"100%", position:"absolute", top:"50%"})}>
+        <div css={overlay} onClick={setModalStateDefault}></div>
+        <Modal setModalStateDefault={setModalStateDefault}/>
+      </section>)}
       <Header />
       <section css={itemSection}>
         <section className='input-section'>
@@ -85,7 +93,7 @@ function App() {
             
             </div>
         </section>
-        <button onClick={deleteItemList} css={deleteAllBtn}>리스트 전체 삭제</button>
+        <button onClick={setModalStateDefault} css={deleteAllBtn}>리스트 전체 삭제</button>
         {/* 성공할 때마다 참 잘했어요 하면서 하트가 막 떠오르게 못함? */}
       </section>
     </div>
