@@ -19,8 +19,8 @@ function TodoItem({item}) {
         <input type="checkbox" css={isDoneCheckbox}/>
         <span css={itemContent}>{item.content}</span>
         <div css={css({minWidth:"70px"})}>
-          <button css={[itemBtn, btnMargin]}><FaPenToSquare /></button>          
-          <button css={itemBtn} onClick={()=> handleDeleteItemClick(item.id)}><MdDelete/></button>
+          <button css={ [modifyBtn, deleteBtn]}><FaPenToSquare /></button>          
+          <button css={deleteBtn} onClick={()=> handleDeleteItemClick(item.id)}><MdDelete/></button>
         </div>
     </div>
   );
@@ -32,6 +32,8 @@ const todoItemContainer = css`
   display: flex;
   justify-content: left;
   margin: 20px;
+  label: todo-item-container;
+
 `
 
 const isDoneCheckbox = css`
@@ -45,11 +47,13 @@ const itemContent = css`
   margin:0 10px;
   text-align: start;
 `
-const itemBtn = css`
+const deleteBtn = css`
   cursor: pointer;
   border-radius: 5px;
+  label: delete-btn;
 `
 
-const btnMargin = css`
+const modifyBtn = css`
   margin-right: 5px;
+  label: modify-btn;
 `

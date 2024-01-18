@@ -41,6 +41,8 @@ const modalContainer = css`
     display: flex;
     flex-direction: column;
     align-items: center;
+    label: modal-container;
+
 `
 
 const modalBtnsContainer=css`
@@ -49,6 +51,8 @@ const modalBtnsContainer=css`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  label: modal-btns-container;
+
 `
 
 const modalCloseBtn = css`
@@ -66,6 +70,8 @@ const modalCloseBtn = css`
     margin-bottom: 2rem;
     border: none;
     padding-bottom:5px;
+    label: modal-close-btn;
+
  &:hover{
     background-color: #f75a55;
   }
@@ -90,6 +96,8 @@ const modalBtn = css`
 const yesBtnStyle = css`
   background-color: #eb7473; 
   color: white;
+  label: yes-btn;
+
   &:hover{
     background-color: #f75a55;
   }
@@ -101,6 +109,8 @@ const yesBtnStyle = css`
 const noBtnStyle = css`
   background-color: #fff; 
   color: #333;
+  label: no-btn;
+
   &:hover{
     background-color: #eee;
   }

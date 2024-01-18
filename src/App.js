@@ -24,8 +24,6 @@ function App() {
     setModalDataState(!modalDataState)
   }
 
-  console.log(modalDataState);
-
   const handleInputChange = (e)=>{
     setInputValue(e.target.value);
   }
@@ -68,7 +66,7 @@ function App() {
       </section>)}
       <Header />
       <section css={itemSection}>
-        <section className='input-section'>
+        <section>
           <h2 css={pageTitle}>목록에 아이템 담기</h2>
           <input type="text" placeholder='아이템을 새로 추가하세요' 
           css={inputLine}  
@@ -77,7 +75,7 @@ function App() {
           onClick={handleAddBtnClick} >추가하기
           </button>
           </section>
-        <section css={listSection} className='list-section'>
+        <section css={listSection}>
           <div css={itemListContainer}>
             {filteredTodo.length>0 ? (
               filteredTodo.map(item => (
@@ -85,7 +83,7 @@ function App() {
               )) 
               ):
                 searchValue.trim() !== ''?(
-                  <div css={emptyItem}>검색 결과와 일치하는 항목이 없습니다.</div>
+                  <div css={emptyItemAlert}>검색 결과와 일치하는 항목이 없습니다.</div>
                 ):(
                   todo.map(item => ( <TodoItem key={item.id} item={item}/>)
             ))
@@ -106,13 +104,16 @@ const overlay = css`
   inset:0;
   background-color: rgba(0,0,0,0.5);
   z-index: 998;
+  label: modal-overlay;
+
 `
 
 const itemSection = css`
   margin-top: 150px;
+  label: item-section;
 `
 
-const emptyItem = css`
+const emptyItemAlert = css`
   height: 100px;
   padding-top: 50px;;
 `
@@ -145,6 +146,7 @@ const addBtn = css`
   cursor: pointer;
   font-family: "SejonghospitalBold";
   font-size: 16px;
+  label: add-btn;
 `
 
 const deleteAllBtn = css`
@@ -157,6 +159,7 @@ const deleteAllBtn = css`
   color: #fff;
   font-family: "seolleimcool-SemiBold";
   width: 150px;
+  label: delete-all-btn;
 `
 
 const itemListContainer = css`
@@ -165,9 +168,11 @@ const itemListContainer = css`
   border: 1px solid #ccc;
   border-radius: 10px;
   font-family: "seolleimcool-SemiBold";
+  label: item-list-container;
 `
 
 const listSection = css`
   display: flex;
   justify-content: center;
+  label: list-section;
 `

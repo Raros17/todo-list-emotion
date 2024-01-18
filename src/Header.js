@@ -70,6 +70,8 @@ const header = css`
   font-weight: 600;
   border-bottom: 3px solid #ccc;
   font-family: 'seolleimcool-SemiBold';
+  label: header;
+
 `
 
 const homeBtn = css`
@@ -85,6 +87,8 @@ const homeBtn = css`
     background-color: #fff;
     border: 1px solid #eb7473;
     color:#eb7473;
+    label: home-btn;
+
     &:hover {
         transition: all 0.5s ease;
         color: #f75a55;
@@ -108,6 +112,8 @@ const darkModeBtn = css`
     background-color: #fff;
     border: 1px solid #eb7473;
     color:#eb7473;
+    label: dark-mode-btn;
+
     &:hover {
         transition: all 0.5s ease;
         color: #f75a55;
@@ -123,6 +129,8 @@ const searchContainer = css`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  label: search-container;
+
 `
 
 const searchBoxInput = css`
@@ -146,6 +154,8 @@ const searchBtn = css`
     color: #fff;
     font-size: 15px;
     border: none;    
+    label: search-btn;
+
     &:hover {
         transition: all 0.5 ease;
         background: #dd2120;
